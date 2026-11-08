@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Contact | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Contact us</h1><p>Questions, tours, applications and portal help.</p></div></div>
+<section class="section">
+  <div class="wrap two">
+    <div>
+      <h2>Get in touch</h2>
+      <p>The school office is happy to help with admissions, fees, boarding, tours, parent enquiries and any problems with the student portal. Send us a message and we will reply within two working days, usually sooner.</p>
+      <p><strong>Address</strong><br>{{ SCHOOL.address }}</p>
+      <p><strong>Telephone</strong><br>{{ SCHOOL.phone }}</p>
+      <p><strong>Email</strong><br><a href="mailto:{{ SCHOOL.email }}">{{ SCHOOL.email }}</a></p>
+      <p><strong>Office hours</strong><br>Monday to Friday, 7:30 am to 4:00 pm. Tours are by appointment, including some Saturdays.</p>
+      <h3>Portal help</h3>
+      <p>If you cannot log in, include your child’s full name, class and registration number in your message. For the safety of every student, we confirm the identity of the parent or guardian before resetting any password.</p>
+    </div>
+    <form method="post" class="card" novalidate>
+      {% csrf_token %}
+      <h3>Send a message</h3>
+      {% for field in form %}
+        <div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>
+      {% endfor %}
+      <button class="btn btn-sea" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

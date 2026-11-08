@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}About us | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>About Evason International Secondary School</h1><p>Who we are, what we believe and how we run our school.</p></div></div>
+
+<section class="section">
+  <div class="wrap two">
+    <div>
+      <h2>Our story</h2>
+      <p>Evason International Secondary School was founded by a group of educators and parents who shared one frustration: good schools were hard to find, and even good schools were often unclear with families about how children were really doing. They set out to build a school that was demanding without being harsh, modern without being showy, and transparent from the first day of term to the last.</p>
+      <p>We began with a small intake of junior secondary students, a handful of dedicated teachers and a simple belief that children rise to the standard the adults around them set and explain. Year after year the school has grown, adding senior classes, laboratories, a library, boarding houses, a sports field and, most recently, a computer-based results portal that gives every student a private window onto their own progress.</p>
+      <p>Today Evason educates students from JSS1 to SS3. We remain deliberately modest in size, because we would rather know every child than enrol every applicant.</p>
+    </div>
+    <div>
+      <h2>Mission and vision</h2>
+      <p><strong>Our mission</strong> is to provide a rigorous, caring and technologically current secondary education that prepares each student for higher learning, meaningful work and responsible citizenship in Nigeria and across the world.</p>
+      <p><strong>Our vision</strong> is to be the school that parents recommend first: known for fair assessment, thoughtful teaching, confident graduates and an open, trusting partnership between home and school.</p>
+      <p><strong>Our motto</strong>, “{{ SCHOOL.motto }}”, reminds us that an answer without reasoning is not yet learning. Students are taught to show their steps, teachers to show their marking, and the school to show its results.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>Our core values</h2>
+    <div class="rules" style="margin-top:2rem">
+      <article><h3>Integrity</h3><p>We tell the truth, mark honestly and keep accurate records. Cheating in any form is treated seriously, and honesty is celebrated every term.</p></article>
+      <article><h3>Excellence</h3><p>We set high standards and give students the help they need to reach them. Effort, improvement and achievement are all recognised.</p></article>
+      <article><h3>Respect</h3><p>We treat one another with courtesy, listen before we speak and value every culture, faith and voice in our community.</p></article>
+      <article><h3>Curiosity</h3><p>We ask questions, test ideas and enjoy discovery. Practical work, projects and discussion are part of every subject.</p></article>
+      <article><h3>Service</h3><p>We believe knowledge is meant to be used for others. Every student takes part in community service each year.</p></article>
+      <article><h3>Partnership</h3><p>We work closely with parents and guardians, sharing information early and often so that problems are solved together.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap two">
+    <div>
+      <h2>A message from the Principal</h2>
+      <blockquote class="quote">Welcome to Evason. When parents visit us they often ask what we do differently. My answer is simple: we pay attention. We pay attention to how a child learns, to how a lesson lands, to how a mark is awarded and to how a family hears about it. Attention is not glamorous, but it is what turns potential into achievement.<br><br>I invite you to visit, to ask hard questions and to meet the teachers. We would be honoured to earn your trust, and to help your child discover how much they are capable of.<cite>The Principal, {{ SCHOOL.name }}</cite></blockquote>
+    </div>
+    <div>
+      <h2>How the school is run</h2>
+      <p>The Principal leads the school with two Vice Principals, one for academics and one for student welfare. Each year group has a form teacher and each subject has a head of department who reviews schemes of work, moderates tests and supports colleagues.</p>
+      <p>The examinations office manages test schedules, marking standards and the entry of results into the school portal. Only the Principal’s office, administrators and teachers expressly authorised as result administrators can upload results. Every upload is attributed to a named member of staff.</p>
+      <p>A Parent-Teacher Association meets each term to give feedback, support school projects and help shape policy. Student representatives sit on a council that meets the Principal monthly.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>Our facilities</h2>
+    <div class="rules" style="margin-top:2rem">
+      <article><h3>Science laboratories</h3><p>Separate, well-equipped laboratories for Physics, Chemistry and Biology, with a full set of practical apparatus and strict safety routines for every class.</p></article>
+      <article><h3>Computer laboratory</h3><p>Modern computers with reliable power backup and internet, used for ICT lessons, research projects and practice for computer-based examinations.</p></article>
+      <article><h3>Library and study hall</h3><p>A quiet library stocked with textbooks, literature, reference works and newspapers, with supervised evening prep for boarders and day students.</p></article>
+      <article><h3>Sports ground and courts</h3><p>A football pitch, athletics track, basketball and volleyball courts and an indoor games room for table tennis, chess and draughts.</p></article>
+      <article><h3>Boarding houses</h3><p>Separate, supervised houses for boys and girls with resident house parents, clean dormitories, a dining hall and a laundry service.</p></article>
+      <article><h3>Medical room</h3><p>A resident nurse and a medical room for first aid and daily care, with a partner clinic nearby for anything more serious.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cta"><div class="wrap"><h2>Come and see for yourself</h2><p>The best way to know a school is to walk its corridors. Book a tour and we will show you the classrooms, laboratories, houses and the results portal in action.</p><div class="btn-row"><a class="btn btn-sea" href="{% url 'contact' %}">Book a tour</a><a class="btn btn-line" href="{% url 'admissions' %}">Admissions</a></div></div></section>
+{% endblock %}

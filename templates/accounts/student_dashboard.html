@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load school_tags %}
+{% block title %}My results | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Welcome, {{ profile.user.first_name }}</h1><p>Your personal results dashboard. Only you can see this page.</p></div></div>
+<div class="wrap portal">
+  <section class="card profile">
+    {% if profile.passport %}<img class="avatar" src="{{ profile.passport.url }}" alt="Passport photograph of {{ profile.full_name }}">{% else %}<div class="avatar" aria-hidden="true">{{ profile.user.first_name|slice:":1" }}{{ profile.user.last_name|slice:":1" }}</div>{% endif %}
+    <div>
+      <h2 style="margin:0">{{ profile.full_name }}</h2>
+      <p style="margin:.2rem 0">Registration number: <strong>{{ profile.reg_number }}</strong></p>
+      <p style="margin:0">Class: <strong>{{ profile.school_class }}</strong> · {{ profile.school_class.section }}</p>
+    </div>
+  </section>
+
+  {% if term %}
+  <div class="toolbar no-print" style="margin-top:1.5rem">
+    <form method="get" class="toolbar">
+      <div class="field"><label for="term">Choose term</label>
+        <select id="term" name="term" onchange="this.form.submit()">{% for t in terms %}<option value="{{ t.pk }}" {% if t.pk == term.pk %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+      <noscript><button class="btn btn-sea btn-sm">Show</button></noscript>
+    </form>
+    <button class="btn btn-gold btn-sm" onclick="window.print()">Print result sheet</button>
+  </div>
+
+  <section class="card">
+    <h2>Result sheet · {{ term }}</h2>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Subject</th><th class="n">1st test (20)</th><th class="n">2nd test (20)</th><th class="n">Exam (60)</th><th class="n">Total (100)</th><th>Grade</th><th>Remark</th></tr></thead>
+      <tbody>
+        {% for r in summary.results %}
+        <tr><td>{{ r.subject.name }}</td><td class="n">{{ r.first_test }}</td><td class="n">{{ r.second_test }}</td><td class="n">{{ r.exam }}</td><td class="n"><strong>{{ r.total }}</strong></td><td><span class="grade g-{{ r.grade }}">{{ r.grade }}</span></td><td>{{ r.remark }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table></div>
+    <div class="scorebox">
+      <div><b>{{ summary.total }} / {{ summary.max_total }}</b><span>Overall total</span></div>
+      <div><b>{{ summary.average }}</b><span>Average</span></div>
+      <div><b><span class="grade g-{{ summary.grade }}">{{ summary.grade }}</span> {{ summary.remark }}</b><span>Overall grade</span></div>
+      <div><b>{{ summary.position|ordinal }} of {{ summary.class_size }}</b><span>Position in {{ profile.school_class }}</span></div>
+    </div>
+    <p class="help">Subjects taken: {{ summary.count }}. Grades: A 70+, B 60 to 69, C 50 to 59, D 45 to 49, E 40 to 44, F below 40.</p>
+  </section>
+  {% else %}
+  <section class="card" style="margin-top:1.5rem">
+    <h2>No results yet</h2>
+    <p>Your teachers have not published any results for you. When they do, they will appear here automatically, with your scores, grades, average and class position. Check back after examinations end, or ask your form teacher if you think something is missing.</p>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

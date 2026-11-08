@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Admissions | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Admissions</h1><p>Joining Evason, step by step.</p></div></div>
+
+<section class="section">
+  <div class="wrap two">
+    <div>
+      <h2>Who we admit</h2>
+      <p>We welcome students who are ready to work hard, be kind and take part in school life. The main intake is into JSS1 each September, with limited places in other classes when a space becomes available. Students joining JSS1 should have completed primary school; students joining other classes should present their most recent school reports.</p>
+      <p>We do not select only the highest scorers. The entrance assessment helps us understand each applicant’s strengths and decide how best to support them. We also meet every family, because a strong partnership between school and home is the best predictor of a happy and successful student.</p>
+      <p>Evason is open to students of every faith, ethnic group and background. Scholarships and fee support are available for a small number of outstanding or deserving applicants each year.</p>
+    </div>
+    <div>
+      <h2>How to apply</h2>
+      <ol class="steps">
+        <li><b>Enquire and visit</b>Contact the school office, book a tour, meet the Principal or a Vice Principal and ask any question you like.</li>
+        <li><b>Collect and complete the application form</b>Return it with a passport photograph, a copy of the birth certificate and the latest school report.</li>
+        <li><b>Sit the entrance assessment</b>Applicants take short papers in English and Mathematics and have a friendly conversation with a member of staff.</li>
+        <li><b>Receive your decision</b>Successful applicants receive an offer letter that sets out fees, uniform, the term calendar and the boarding options.</li>
+        <li><b>Accept the place and register online</b>Pay the acceptance fee, then have your child create a portal account, choose their class and receive their registration number.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap two">
+    <div>
+      <h2>Documents you will need</h2>
+      <ul>
+        <li>Completed application form</li>
+        <li>Birth certificate or sworn declaration of age</li>
+        <li>Two recent passport photographs</li>
+        <li>Primary school leaving certificate, or the last report card for transfer students</li>
+        <li>Transfer certificate or letter from the previous school, where applicable</li>
+        <li>Immunisation record and medical information, including any allergies</li>
+        <li>Parent or guardian identification and contact details</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Fees and boarding</h2>
+      <p>Fees cover tuition, textbooks, laboratory use, ICT, sports, clubs and the results portal. Boarding fees, meals, transport and uniform are listed separately in the offer letter so that there are no surprises. Families may pay termly, and a family discount is available when more than one child attends.</p>
+      <p>To receive the current fee schedule, please contact the bursar at <a href="mailto:{{ SCHOOL.email }}">{{ SCHOOL.email }}</a> or call {{ SCHOOL.phone }}.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Frequently asked questions</h2>
+    <div class="rules" style="margin-top:2rem">
+      <article><h3>Can my child join in the middle of the session?</h3><p>Yes, if there is a vacancy in the right class. We will assess your child, review their previous reports and plan any catch-up support before they start.</p></article>
+      <article><h3>How do students register on the portal?</h3><p>After acceptance, the student opens the Register page, enters their details, selects their class from JSS1 to SS3 and creates a password. The system then gives them a registration number such as EIS-2026-0001, which is also their login name.</p></article>
+      <article><h3>Who can see my child’s results?</h3><p>Only your child, once the school publishes them, and the staff authorised to manage results. No other student can view them, and results never appear on any public page.</p></article>
+      <article><h3>What if my child forgets their password?</h3><p>Contact the school office with your child’s registration number. An administrator can reset the password quickly after verifying your identity.</p></article>
+      <article><h3>Do you offer boarding?</h3><p>Yes. Boarding is available for boys and girls from JSS1, in supervised houses with study time every evening. Day students are welcome to join evening prep as well.</p></article>
+      <article><h3>Is there a uniform?</h3><p>Yes. Full details of the uniform, sports kit and approved bags and shoes are provided in the offer letter and the student handbook.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cta"><div class="wrap"><h2>Ready to take the next step?</h2><p>Send us a message and the admissions team will reply within two working days with an application pack and a suggested tour time.</p><div class="btn-row"><a class="btn btn-sea" href="{% url 'contact' %}">Contact admissions</a><a class="btn btn-line" href="{% url 'register' %}">Already accepted? Register</a></div></div></section>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block title %}{{ SCHOOL.name }} | JSS1 to SS3 day and boarding school{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <h1>Education that <em>shows its working.</em></h1>
+      <p>At Evason International Secondary School every lesson is taught with purpose, every test is marked with care, and every result is recorded openly. From JSS1 to SS3, students learn to think clearly, work honestly and finish what they start, and their families can see exactly how they are doing, term by term, on our secure online portal.</p>
+      <p>We are a modern Nigerian school that combines strong WAEC and NECO results with robotics, public speaking, community service and sport, because a good certificate is only the beginning of a good life.</p>
+      <div class="btn-row">
+        <a class="btn btn-gold" href="{% url 'admissions' %}">Apply for admission</a>
+        <a class="btn btn-line" href="{% url 'login' %}">Student portal log in</a>
+      </div>
+    </div>
+    <aside class="slip" aria-label="Sample result slip">
+      <header><b>Result slip</b><span>First term · JSS3</span></header>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Subject</th><th class="n">1st</th><th class="n">2nd</th><th class="n">Exam</th><th class="n">Total</th><th>Grade</th></tr></thead>
+        <tbody>
+          <tr><td>Mathematics</td><td class="n">17</td><td class="n">18</td><td class="n">54</td><td class="n">89</td><td><span class="grade g-A">A</span></td></tr>
+          <tr><td>English Language</td><td class="n">15</td><td class="n">16</td><td class="n">47</td><td class="n">78</td><td><span class="grade g-A">A</span></td></tr>
+          <tr><td>Basic Science</td><td class="n">14</td><td class="n">15</td><td class="n">39</td><td class="n">68</td><td><span class="grade g-B">B</span></td></tr>
+          <tr><td>Civic Education</td><td class="n">12</td><td class="n">13</td><td class="n">33</td><td class="n">58</td><td><span class="grade g-C">C</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="sum"><span>Average 73.3</span><span>Position 3rd of 41</span></div>
+      <p class="tag">Sample only. Real results are visible to the student alone, after the school publishes them.</p>
+    </aside>
+  </div>
+</section>
+
+<div class="wrap"><div class="facts">
+  <div><b>JSS1 to SS3</b><span>Six year groups, one continuous journey</span></div>
+  <div><b>20 · 20 · 60</b><span>First test, second test and exam in every subject</span></div>
+  <div><b>1 : 22</b><span>Teacher to student ratio in core subjects</span></div>
+  <div><b>Day &amp; boarding</b><span>Safe, supervised, well fed</span></div>
+</div></div>
+
+<section class="section">
+  <div class="wrap two">
+    <div>
+      <h2>A school where nobody is guessing how they are doing</h2>
+      <p class="lede">Too many families wait until the end of the year to learn that a child has been struggling. We built Evason around the opposite idea: no surprises.</p>
+    </div>
+    <div>
+      <p>Each term your child sits two continuous assessment tests and one final examination in every subject. The two tests are marked out of 20, the examination out of 60, and together they make a total of 100. Teachers explain the marking scheme in the first week of term, so students know what is expected long before a paper is placed in front of them.</p>
+      <p>When marking is complete, our result officers enter the scores subject by subject against each student’s registration number. The system adds the marks, awards the grade, works out the average and the position in class, and then, only when the school chooses to publish, shows the result on the student’s own dashboard. Nobody else can open it.</p>
+      <p>Parents who prefer paper still receive a printed report. Those who prefer a screen can log in with their child and talk through every subject together.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>What makes Evason different</h2>
+    <p class="lede">Six commitments we make to every family who joins us.</p>
+    <div class="rules" style="margin-top:2rem">
+      <article><h3>Teaching that starts with understanding</h3><p>Our teachers are trained to ask “why does this work?” before “what is the answer?”. Lessons are built around worked examples, short discussions and quick checks, so that a student who has not understood is noticed on the same day, not at the end of term.</p></article>
+      <article><h3>Honest assessment, recorded properly</h3><p>Scores are entered by named staff, stored securely and never overwritten without a trace. The grading scale is the same for every class and every subject, and it is printed in every student handbook.</p></article>
+      <article><h3>A results portal families actually use</h3><p>Every student has a personal account, created at registration. Results appear there as soon as they are published, with total, grade, remark, class average and position, ready to view on a phone or print for the file.</p></article>
+      <article><h3>Technology as a working tool</h3><p>From JSS1, students learn typing, spreadsheets, safe internet use and the basics of programming. In the senior classes they build real projects, from simple databases to small websites, using our computer laboratory and school-wide Wi-Fi.</p></article>
+      <article><h3>Character as well as grades</h3><p>Punctuality, respect, honesty and service are taught and rewarded. Prefects, house captains and club leaders are chosen by their peers and trained for the job, so leadership is practised and not just praised.</p></article>
+      <article><h3>Safety you can see</h3><p>Controlled gates, trained security staff, a resident nurse, supervised boarding houses and a clear child protection policy keep every student safe. Parents are told quickly and plainly whenever something needs their attention.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Two stages, one clear path</h2>
+    <div class="two" style="margin-top:1.5rem">
+      <div class="card">
+        <h3>Junior Secondary, JSS1 to JSS3</h3>
+        <p>Junior secondary is where good habits are set. Students study English, Mathematics, Basic Science, Basic Technology, Social Studies, Civic Education, Computer Studies, Business Studies, Agricultural Science, Religious Studies, Cultural and Creative Arts, Physical and Health Education and a Nigerian language.</p>
+        <p>By JSS3 students sit the Basic Education Certificate Examination (BECE) with confidence, and meet our guidance counsellor to choose a senior school pathway that matches their strengths and ambitions.</p>
+        <p><a href="{% url 'academics' %}">See the junior curriculum</a></p>
+      </div>
+      <div class="card">
+        <h3>Senior Secondary, SS1 to SS3</h3>
+        <p>In senior secondary students choose a pathway in Science, Arts or Commercial subjects, while continuing with English, Mathematics, Civic Education and Computer Studies. Classes are small, practicals are frequent and past-question practice begins early and continues steadily.</p>
+        <p>Our SS3 students sit the WAEC and NECO examinations and are prepared for JAMB UTME, post-UTME and scholarship tests through timetabled revision clinics and mock examinations.</p>
+        <p><a href="{% url 'academics' %}">See the senior pathways</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap two">
+    <div>
+      <h2>Your child’s results, safe and private</h2>
+      <p>The Evason student portal was designed with one rule at its heart: a student sees their own results and nobody else’s. Here is how it works in practice.</p>
+      <ol class="steps">
+        <li><b>Register and choose a class</b>Each student registers online, picks their class from JSS1 to SS3 and receives a unique registration number.</li>
+        <li><b>Teachers enter the scores</b>Authorised staff select the student by registration number and enter the first test, second test and exam for each subject the class offers.</li>
+        <li><b>The system does the arithmetic</b>Totals, grades, remarks, averages and class positions are calculated automatically, with no copying errors.</li>
+        <li><b>The school publishes, the student reads</b>Once results are published, the student logs in and finds them on a personal dashboard, ready to print.</li>
+      </ol>
+      <div class="btn-row"><a class="btn btn-gold" href="{% url 'register' %}">Register as a student</a><a class="btn btn-line" href="{% url 'login' %}">Log in</a></div>
+    </div>
+    <div>
+      <blockquote class="quote">“Before Evason I only saw my daughter’s results on a crumpled sheet in her bag. Now we open her dashboard together on Saturday morning and plan the next term. She has started setting her own targets.”<cite>A parent of a JSS2 student</cite></blockquote>
+      <blockquote class="quote">“The tests are fair and the teachers explain every mistake. I stopped being afraid of Mathematics when I saw my own scores rise on the dashboard.”<cite>An SS1 student</cite></blockquote>
+      <blockquote class="quote">“Entering and publishing results used to take our staff two weeks. Now a class is complete in a few days, and the broadsheet is ready as soon as the last paper is in.”<cite>A member of the examinations office</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap two">
+    <div>
+      <h2>Life beyond the timetable</h2>
+      <p>Students learn best when they belong. At Evason every child is placed in one of four houses and competes for the year’s honours in academics, sports, drama, debate and cleanliness. Clubs meet every Wednesday afternoon, including Robotics, Press and Writers, Debate, Junior Engineers, Entrepreneurs, Red Cross, Music and Choir, and Art and Design.</p>
+      <p>Each term the school hosts an inter-house sports day, a cultural day and an open evening for parents. Every year students take part in community service, from tree planting to tutoring primary pupils in the neighbourhood.</p>
+      <p><a href="{% url 'campus_life' %}">Explore campus life</a></p>
+    </div>
+    <div>
+      <h2>The school year at a glance</h2>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Term</th><th>Typical window</th><th>Highlights</th></tr></thead>
+        <tbody>
+          <tr><td>First term</td><td>September to December</td><td>Orientation, first tests, inter-house sports, end-of-term examinations</td></tr>
+          <tr><td>Second term</td><td>January to April</td><td>Second tests, science fair, debate league, SS3 mock examinations</td></tr>
+          <tr><td>Third term</td><td>April to July</td><td>WAEC and NECO, cultural day, prize-giving, graduation</td></tr>
+        </tbody>
+      </table></div>
+      <p class="help" style="margin-top:.8rem">Exact dates are announced on the school calendar each session.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Admissions are open for the new session</h2>
+    <p>Places in JSS1 and in transfer classes are limited so that every class stays small. Start your application today, or book a tour and meet the teachers who will know your child by name.</p>
+    <div class="btn-row"><a class="btn btn-sea" href="{% url 'admissions' %}">How to apply</a><a class="btn btn-line" href="{% url 'contact' %}">Book a school tour</a></div>
+  </div>
+</section>
+{% endblock %}

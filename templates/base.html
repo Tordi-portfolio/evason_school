@@ -1,0 +1,45 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ SCHOOL.name }}{% endblock %}</title>
+<meta name="description" content="{% block desc %}{{ SCHOOL.name }}: a modern day and boarding secondary school for JSS1 to SS3, with an online student results portal.{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{% url 'home' %}">{% include 'partials/logo.html' %}<span><b>Evason International</b><small>Secondary School</small></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="{% url 'home' %}">Home</a><a href="{% url 'about' %}">About</a><a href="{% url 'academics' %}">Academics</a>
+      <a href="{% url 'admissions' %}">Admissions</a><a href="{% url 'campus_life' %}">Campus life</a><a href="{% url 'contact' %}">Contact</a>
+      {% if user.is_authenticated %}
+        <a class="btn btn-sea btn-sm" href="{% url 'dashboard' %}">My dashboard</a>
+        <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link" type="submit">Log out</button></form>
+      {% else %}
+        <a href="{% url 'login' %}">Log in</a><a class="btn btn-gold btn-sm" href="{% url 'register' %}">Register</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+{% if messages %}<div class="wrap"><ul class="msgs" role="status">{% for m in messages %}<li class="msg {{ m.tags }}">{{ m }}</li>{% endfor %}</ul></div>{% endif %}
+<main id="main">{% block content %}{% endblock %}</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <div><h4>{{ SCHOOL.name }}</h4><p>A school built on a simple promise: every child’s work is taught with care, assessed fairly, recorded honestly and shared openly with the family. We educate young people from JSS1 to SS3 for university, for work and for a useful life.</p></div>
+      <div><h4>The school</h4><ul><li><a href="{% url 'about' %}">About Evason</a></li><li><a href="{% url 'academics' %}">Academics</a></li><li><a href="{% url 'admissions' %}">Admissions</a></li><li><a href="{% url 'campus_life' %}">Campus life</a></li></ul></div>
+      <div><h4>Portal</h4><ul><li><a href="{% url 'login' %}">Student log in</a></li><li><a href="{% url 'register' %}">Register as a student</a></li><li><a href="{% url 'contact' %}">Forgot your details?</a></li><li><a href="{% url 'admin:index' %}">Staff administration</a></li></ul></div>
+      <div><h4>Visit or call</h4><p>{{ SCHOOL.address }}<br>{{ SCHOOL.phone }}<br>{{ SCHOOL.email }}<br>Monday to Friday, 7:30 am to 4:00 pm</p></div>
+    </div>
+    <div class="legal">© {{ year }} {{ SCHOOL.name }}. All rights reserved.</div>
+  </div>
+</footer>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

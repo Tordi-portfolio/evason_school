@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Subjects for {{ school_class }} | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Subjects for {{ school_class }}</h1><p>Tick every subject this class offers, then save.</p></div></div>
+<div class="wrap portal">
+  <form method="post" class="card">
+    {% csrf_token %}
+    <div class="check-grid">
+      {% for s in subjects %}<label><input type="checkbox" name="subjects" value="{{ s.pk }}" {% if s.pk in selected %}checked{% endif %}> {{ s.name }}</label>{% endfor %}
+    </div>
+    <div class="btn-row"><button class="btn btn-sea" type="submit">Save subjects</button><a class="btn btn-line" style="color:var(--ink)" href="{% url 'subjects' %}">Cancel</a></div>
+  </form>
+</div>
+{% endblock %}

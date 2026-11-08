@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Enter results | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>{{ student.full_name }}</h1><p>{{ student.reg_number }} · {{ student.school_class }} · {{ term }}</p></div></div>
+<div class="wrap portal">
+  {% if no_subjects %}
+    <p class="msg error">{{ student.school_class }} has no subjects yet. {% if user.is_school_admin %}<a href="{% url 'class_subjects' student.school_class.pk %}">Assign subjects now</a>.{% else %}Ask the administrator to assign subjects to this class.{% endif %}</p>
+  {% else %}
+  <form method="post" class="card">
+    {% csrf_token %}
+    <p class="help">Enter whole numbers only: first test out of 20, second test out of 20 and exam out of 60. Leave a subject blank to skip it. The total and grade update as you type.</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Subject</th><th>1st test /20</th><th>2nd test /20</th><th>Exam /60</th><th>Total</th><th>Grade</th></tr></thead>
+      <tbody>
+      {% for r in rows %}
+        <tr data-row>
+          <td><strong>{{ r.subject.name }}</strong></td>
+          <td><input class="score" type="number" min="0" max="20" name="ft_{{ r.subject.id }}" value="{{ r.ft }}" aria-label="{{ r.subject.name }} first test"></td>
+          <td><input class="score" type="number" min="0" max="20" name="st_{{ r.subject.id }}" value="{{ r.st }}" aria-label="{{ r.subject.name }} second test"></td>
+          <td><input class="score" type="number" min="0" max="60" name="ex_{{ r.subject.id }}" value="{{ r.ex }}" aria-label="{{ r.subject.name }} exam"></td>
+          <td class="live-total">{{ r.total }}</td>
+          <td><span class="grade live-grade{% if r.grade %} g-{{ r.grade }}{% endif %}">{{ r.grade }}</span></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+    <label style="display:flex;gap:.6rem;align-items:center;margin:1.4rem 0"><input type="checkbox" name="publish" {% if publish %}checked{% endif %} style="width:1.2rem;height:1.2rem"> Publish to the student’s dashboard now. Leave unticked to save as a draft.</label>
+    <button class="btn btn-sea" type="submit">Save results</button>
+    <a class="btn btn-line" style="color:var(--ink)" href="{% url 'class_students' student.school_class.pk %}?term={{ term.pk }}">Back to class</a>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

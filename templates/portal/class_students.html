@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ school_class }} | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>{{ school_class }} · {{ school_class.section }}</h1><p>{{ term|default:"No term selected" }} · {{ n_subjects }} subject{{ n_subjects|pluralize }} assigned</p></div></div>
+<div class="wrap portal">
+  <form method="get" class="toolbar">
+    <div class="field"><label for="term">Term</label><select id="term" name="term" onchange="this.form.submit()">{% for t in terms %}<option value="{{ t.pk }}" {% if term and t.pk == term.pk %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+    <div class="field"><label for="q">Search</label><input id="q" type="text" name="q" value="{{ q }}" placeholder="Name or registration number"></div>
+    <button class="btn btn-sea" type="submit">Apply</button>
+    <a class="btn btn-line" style="color:var(--ink)" href="{% url 'broadsheet' school_class.pk %}?term={{ term.pk }}">View broadsheet</a>
+  </form>
+
+  {% if user.can_manage_results and term %}
+  <form method="post" action="{% url 'publish' school_class.pk %}" class="toolbar">
+    {% csrf_token %}<input type="hidden" name="term" value="{{ term.pk }}">
+    <button class="btn btn-gold btn-sm" name="action" value="publish" type="submit">Publish all results for {{ school_class }}</button>
+    <button class="btn btn-line btn-sm" style="color:var(--ink)" name="action" value="draft" type="submit">Move all back to draft</button>
+  </form>
+  {% endif %}
+
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Reg. number</th><th>Student</th><th>Results entered</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+    {% for row in rows %}
+      <tr><td>{{ row.student.reg_number }}</td><td>{{ row.student.full_name }}</td>
+      <td>{{ row.entered }} of {{ n_subjects }}</td>
+      <td>{% if not row.entered %}<span class="pill none">No results</span>{% elif row.published == row.entered %}<span class="pill ok">Published</span>{% else %}<span class="pill draft">Draft</span>{% endif %}</td>
+      <td style="text-align:right">{% if user.can_manage_results and term %}<a class="btn btn-sea btn-sm" href="{% url 'enter_results' row.student.pk term.pk %}">{% if row.entered %}Edit results{% else %}Enter results{% endif %}</a>{% endif %}</td></tr>
+    {% empty %}<tr><td colspan="5">No students are registered in {{ school_class }} yet.</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

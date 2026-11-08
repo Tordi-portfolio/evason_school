@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Subjects per class | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Subjects per class</h1><p>Decide which subjects each class studies. Results can only be entered for assigned subjects.</p></div></div>
+<div class="wrap portal">
+  <form method="post" class="card toolbar" style="margin-bottom:2rem">
+    {% csrf_token %}
+    <div class="field" style="flex:1;min-width:240px"><label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>{{ form.name }}{{ form.name.errors }}</div>
+    <button class="btn btn-sea" type="submit">Add subject</button>
+  </form>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Class</th><th>Assigned subjects</th><th></th></tr></thead>
+    <tbody>
+    {% for c in classes %}
+      <tr><td><strong>{{ c.name }}</strong></td>
+      <td>{% if c.subjects.all %}<ul class="chips">{% for s in c.subjects.all %}<li>{{ s.name }}</li>{% endfor %}</ul>{% else %}<span class="pill draft">None assigned</span>{% endif %}</td>
+      <td style="text-align:right"><a class="btn btn-sea btn-sm" href="{% url 'class_subjects' c.pk %}">Edit subjects</a></td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

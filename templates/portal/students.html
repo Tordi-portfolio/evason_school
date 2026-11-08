@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Students | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Students</h1><p>Search by name or registration number.</p></div></div>
+<div class="wrap portal">
+  <form method="get" class="toolbar">
+    <div class="field"><label for="q">Search</label><input id="q" type="text" name="q" value="{{ q }}" placeholder="Name or EIS-2026-0001"></div>
+    <div class="field"><label for="c">Class</label><select id="c" name="class"><option value="">All classes</option>{% for c in classes %}<option value="{{ c.pk }}" {% if class_id == c.pk|stringformat:"s" %}selected{% endif %}>{{ c }}</option>{% endfor %}</select></div>
+    <button class="btn btn-sea" type="submit">Filter</button>
+  </form>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Reg. number</th><th>Name</th><th>Class</th><th>Guardian</th><th></th></tr></thead>
+    <tbody>
+    {% for s in students %}
+      <tr><td>{{ s.reg_number }}</td><td>{{ s.full_name }}</td><td>{{ s.school_class }}</td><td>{{ s.guardian_name }}<br><small>{{ s.guardian_phone }}</small></td>
+      <td>{% if user.can_manage_results and term %}<a class="btn btn-sea btn-sm" href="{% url 'enter_results' s.pk term.pk %}">Enter results</a>{% endif %}
+          {% if user.is_school_admin %}<a class="btn btn-line btn-sm" style="color:var(--ink)" href="{% url 'admin:accounts_studentprofile_change' s.pk %}">Edit</a>{% endif %}</td></tr>
+    {% empty %}<tr><td colspan="5">No students match your search.</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

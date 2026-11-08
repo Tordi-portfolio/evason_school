@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Staff dashboard | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Staff dashboard</h1><p>Signed in as {{ user.get_full_name|default:user.username }} · {{ user.get_role_display }}{% if user.can_manage_results and not user.is_school_admin %} (result admin){% endif %}</p></div></div>
+<div class="wrap portal">
+  <div class="stats">
+    <div><b>{{ n_students }}</b><span>Registered students</span></div>
+    <div><b>{{ n_subjects }}</b><span>Subjects</span></div>
+    <div><b>{{ n_results }}</b><span>Result rows</span></div>
+    <div><b>{{ n_unpublished }}</b><span>Drafts not yet published</span></div>
+  </div>
+
+  {% if not terms %}<p class="msg error">No term exists yet. Add one in the <a href="{% url 'admin:academics_term_add' %}">admin area</a>, or run <code>python manage.py seed_school</code>.</p>{% endif %}
+
+  {% if user.can_manage_results %}
+  <section class="card" style="margin-bottom:2rem">
+    <h2>Upload results for a student</h2>
+    <p>Type the student’s registration number, choose the term and start entering scores. The system lists exactly the subjects assigned to that student’s class.</p>
+    <form method="post" action="{% url 'find_student' %}" class="toolbar">
+      {% csrf_token %}
+      <div class="field"><label for="reg">Registration number</label><input id="reg" type="text" name="reg_number" placeholder="EIS-2026-0001" required></div>
+      <div class="field"><label for="t">Term</label><select id="t" name="term">{% for t in terms %}<option value="{{ t.pk }}" {% if t.pk == term.pk %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+      <button class="btn btn-sea" type="submit">Find student</button>
+    </form>
+  </section>
+  {% else %}
+  <p class="msg">You can view classes and broadsheets. To upload results, ask the administrator to mark your account as a result admin.</p>
+  {% endif %}
+
+  <section>
+    <h2>Classes</h2>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Class</th><th>Stage</th><th class="n">Students</th><th class="n">Subjects</th><th></th></tr></thead>
+      <tbody>
+      {% for c in classes %}
+        <tr><td><strong>{{ c.name }}</strong></td><td>{{ c.section }}</td><td class="n">{{ c.n_students }}</td><td class="n">{{ c.n_subjects }}</td>
+        <td style="text-align:right"><a class="btn btn-sea btn-sm" href="{% url 'class_students' c.pk %}{% if term %}?term={{ term.pk }}{% endif %}">Open class</a>
+          <a class="btn btn-line btn-sm" href="{% url 'broadsheet' c.pk %}{% if term %}?term={{ term.pk }}{% endif %}">Broadsheet</a>
+          {% if user.is_school_admin %}<a class="btn btn-line btn-sm" href="{% url 'class_subjects' c.pk %}">Subjects</a>{% endif %}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+  </section>
+
+  <p class="btn-row">
+    <a class="btn btn-line" style="color:var(--ink)" href="{% url 'students' %}">All students</a>
+    {% if user.is_school_admin %}<a class="btn btn-gold" href="{% url 'subjects' %}">Manage subjects per class</a><a class="btn btn-line" style="color:var(--ink)" href="{% url 'admin:index' %}">Full admin area</a>{% endif %}
+  </p>
+</div>
+{% endblock %}

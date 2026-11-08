@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load school_tags %}
+{% block title %}Broadsheet {{ school_class }} | {{ SCHOOL.name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>{{ school_class }} broadsheet</h1><p>{{ term|default:"No term selected" }} · includes drafts and published results</p></div></div>
+<div class="wrap portal">
+  <form method="get" class="toolbar no-print">
+    <div class="field"><label for="term">Term</label><select id="term" name="term" onchange="this.form.submit()">{% for t in terms %}<option value="{{ t.pk }}" {% if term and t.pk == term.pk %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+    <button type="button" class="btn btn-gold btn-sm" onclick="window.print()">Print</button>
+    <a class="btn btn-line btn-sm" style="color:var(--ink)" href="{% url 'class_students' school_class.pk %}?term={{ term.pk }}">Back to class</a>
+  </form>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Position</th><th>Reg. number</th><th>Student</th><th class="n">Subjects</th><th class="n">Total</th><th class="n">Average</th><th>Grade</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr><td>{% if r.position %}{{ r.position|ordinal }}{% else %}-{% endif %}</td><td>{{ r.student.reg_number }}</td><td>{{ r.student.full_name }}</td><td class="n">{{ r.count }}</td><td class="n">{{ r.total }}</td><td class="n">{{ r.average }}</td><td>{% if r.count %}<span class="grade g-{{ r.grade }}">{{ r.grade }}</span>{% else %}-{% endif %}</td></tr>
+    {% empty %}<tr><td colspan="7">No students in this class yet.</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}
